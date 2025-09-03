@@ -1,134 +1,198 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>XiliX OS</title>
-  <link rel="stylesheet" href="https://unpkg.com/98.css">
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: teal;
-      font-family: "MS Sans Serif", sans-serif;
-      overflow: hidden;
-    }
-    .desktop {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    .icon {
-      width: 80px;
-      text-align: center;
-      color: white;
-      cursor: default;
-      position: absolute;
-    }
-    .icon img {
-      width: 32px;
-      height: 32px;
-      display: block;
-      margin: 0 auto 4px;
-    }
-    .window {
-      position: absolute;
-      top: 100px;
-      left: 100px;
-      width: 300px;
-      display: none;
-      z-index: 10;
-    }
-    .taskbar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: silver;
-      display: flex;
-      align-items: center;
-      border-top: 2px solid white;
-      padding: 2px;
-    }
-    .start-btn {
-      margin-right: 8px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>XiliX OS</title>
+<link rel="stylesheet" href="https://unpkg.com/98.css">
+<style>
+  body { margin:0; height:100vh; background: teal; font-family:"MS Sans Serif", sans-serif; overflow:hidden; }
+  .desktop { position: relative; width: 100%; height: 100%; }
+  .icon { width: 80px; text-align: center; color: white; cursor: pointer; position: absolute; }
+  .icon img { width: 32px; height: 32px; display: block; margin: 0 auto 4px; }
+  .window { position: absolute; width: 300px; display: none; border: 2px solid black; background: silver; z-index:10; }
+  .title-bar { display:flex; justify-content: space-between; background: navy; color: white; padding:2px; cursor: move; }
+  .title-bar-text { padding-left:5px; }
+  .title-bar-controls button { width:20px; height:18px; }
+  .window-body { padding:5px; background: #C0C0C0; height: calc(100% - 26px); overflow:auto; }
+  .taskbar { position:absolute; bottom:0; left:0; right:0; height:40px; background:silver; display:flex; align-items:center; border-top:2px solid white; padding:2px; }
+  .start-btn { margin-right:8px; }
+  input, textarea { width:100%; box-sizing:border-box; }
+</style>
 </head>
 <body>
-  <div class="desktop" id="desktop">
-    <!-- Desktop Icons -->
-    <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('mycomputer')">
-      <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/system-file-manager-icon.png" alt="icon">
-      <span>My Computer</span>
-    </div>
-    <div class="icon" style="top: 120px; left: 20px;" onclick="openWindow('about')">
-      <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/32/dialog-information-icon.png" alt="icon">
-      <span>About</span>
-    </div>
-    <div class="icon" style="top: 220px; left: 20px;" onclick="openWindow('trash')">
-      <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-places/32/user-trash-icon.png" alt="icon">
-      <span>Trash</span>
-    </div>
+<div class="desktop" id="desktop">
+  <!-- Desktop icons -->
+  <div class="icon" style="top:20px; left:20px;" onclick="openWindow('explorer')">
+    <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/system-file-manager-icon.png">
+    <span>File Explorer</span>
+  </div>
+  <div class="icon" style="top:120px; left:20px;" onclick="openWindow('notes')">
+    <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-mimetypes/32/text-x-generic-icon.png">
+    <span>Notes</span>
+  </div>
+  <div class="icon" style="top:220px; left:20px;" onclick="openWindow('trash')">
+    <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-places/32/user-trash-icon.png">
+    <span>Trash</span>
+  </div>
 
-    <!-- Windows -->
-    <div class="window" id="mycomputer">
-      <div class="title-bar">
-        <div class="title-bar-text">My Computer</div>
-        <div class="title-bar-controls">
-          <button aria-label="Close" onclick="closeWindow('mycomputer')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <p>Welcome to <b>XiliX OS</b>.</p>
-        <ul>
-          <li>Documents</li>
-          <li>Programs</li>
-          <li>Settings</li>
-        </ul>
+  <!-- Windows -->
+  <div class="window" id="explorer" style="height:300px;">
+    <div class="title-bar" onmousedown="startDrag(event, 'explorer')">
+      <div class="title-bar-text">File Explorer</div>
+      <div class="title-bar-controls">
+        <button onclick="closeWindow('explorer')"></button>
       </div>
     </div>
-
-    <div class="window" id="about">
-      <div class="title-bar">
-        <div class="title-bar-text">About XiliX OS</div>
-        <div class="title-bar-controls">
-          <button aria-label="Close" onclick="closeWindow('about')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <p><b>XiliX OS</b><br>A modern OS with a retro look.<br><br>
-        Version: 0.1<br>
-        Designed for fun and learning.</p>
-      </div>
-    </div>
-
-    <div class="window" id="trash">
-      <div class="title-bar">
-        <div class="title-bar-text">Trash</div>
-        <div class="title-bar-controls">
-          <button aria-label="Close" onclick="closeWindow('trash')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <p>The trash is empty.</p>
-      </div>
+    <div class="window-body" id="explorer-body">
+      <button onclick="createFile()">New File</button>
+      <ul id="file-list"></ul>
     </div>
   </div>
 
-  <!-- Taskbar -->
-  <div class="taskbar">
-    <button class="start-btn">Start</button>
-    <span>XiliX OS</span>
+  <div class="window" id="notes" style="height:250px;">
+    <div class="title-bar" onmousedown="startDrag(event, 'notes')">
+      <div class="title-bar-text">Notes</div>
+      <div class="title-bar-controls">
+        <button onclick="closeWindow('notes')"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <textarea id="note-text" placeholder="Write your notes here..." rows="10"></textarea>
+      <button onclick="saveNotes()">Save</button>
+    </div>
   </div>
 
-  <script>
-    function openWindow(id) {
-      document.getElementById(id).style.display = "block";
+  <div class="window" id="trash" style="height:200px;">
+    <div class="title-bar" onmousedown="startDrag(event, 'trash')">
+      <div class="title-bar-text">Trash</div>
+      <div class="title-bar-controls">
+        <button onclick="closeWindow('trash')"></button>
+      </div>
+    </div>
+    <div class="window-body" id="trash-body">
+      <ul id="trash-list"></ul>
+    </div>
+  </div>
+</div>
+
+<div class="taskbar">
+  <button class="start-btn" onclick="alert('Start menu coming soon!')">Start</button>
+  <span>XiliX OS</span>
+</div>
+
+<script>
+let zIndexCounter = 10;
+
+// Basic window management
+function openWindow(id){
+  const win = document.getElementById(id);
+  win.style.display = 'block';
+  win.style.zIndex = ++zIndexCounter;
+  refreshFiles();
+  refreshTrash();
+}
+
+function closeWindow(id){
+  document.getElementById(id).style.display = 'none';
+}
+
+// Dragging windows
+let dragInfo = null;
+function startDrag(e, id){
+  dragInfo = {id, offsetX:e.offsetX, offsetY:e.offsetY};
+  document.onmousemove = drag;
+  document.onmouseup = () => { document.onmousemove=null; document.onmouseup=null; dragInfo=null; };
+}
+function drag(e){
+  if(!dragInfo) return;
+  const win = document.getElementById(dragInfo.id);
+  win.style.left = (e.clientX - dragInfo.offsetX) + 'px';
+  win.style.top = (e.clientY - dragInfo.offsetY) + 'px';
+  win.style.zIndex = ++zIndexCounter;
+}
+
+// LocalStorage for files
+function createFile(){
+  let files = JSON.parse(localStorage.getItem('files')||'[]');
+  const name = prompt("Enter file name:");
+  if(name) files.push({name, content:''});
+  localStorage.setItem('files', JSON.stringify(files));
+  refreshFiles();
+}
+
+function refreshFiles(){
+  const list = document.getElementById('file-list');
+  list.innerHTML='';
+  const files = JSON.parse(localStorage.getItem('files')||'[]');
+  files.forEach((f,i)=>{
+    const li=document.createElement('li');
+    li.textContent=f.name;
+    li.style.cursor='pointer';
+    li.onclick = () => { 
+      const newContent = prompt("Edit file:", f.content);
+      if(newContent!==null) {
+        f.content=newContent;
+        files[i]=f;
+        localStorage.setItem('files', JSON.stringify(files));
+        refreshFiles();
+      }
     }
-    function closeWindow(id) {
-      document.getElementById(id).style.display = "none";
+    li.oncontextmenu = (ev)=>{
+      ev.preventDefault();
+      deleteFile(i);
     }
-  </script>
+    list.appendChild(li);
+  });
+}
+
+function deleteFile(index){
+  let files = JSON.parse(localStorage.getItem('files')||'[]');
+  let trash = JSON.parse(localStorage.getItem('trash')||'[]');
+  trash.push(files[index]);
+  localStorage.setItem('trash', JSON.stringify(trash));
+  files.splice(index,1);
+  localStorage.setItem('files', JSON.stringify(files));
+  refreshFiles();
+  refreshTrash();
+}
+
+function refreshTrash(){
+  const list = document.getElementById('trash-list');
+  list.innerHTML='';
+  const trash = JSON.parse(localStorage.getItem('trash')||'[]');
+  trash.forEach((f,i)=>{
+    const li = document.createElement('li');
+    li.textContent = f.name;
+    li.style.cursor='pointer';
+    li.onclick = () => {
+      // Restore file
+      let files = JSON.parse(localStorage.getItem('files')||'[]');
+      files.push(f);
+      trash.splice(i,1);
+      localStorage.setItem('files', JSON.stringify(files));
+      localStorage.setItem('trash', JSON.stringify(trash));
+      refreshFiles();
+      refreshTrash();
+    }
+    li.oncontextmenu = (ev)=>{ // permanently delete
+      ev.preventDefault();
+      trash.splice(i,1);
+      localStorage.setItem('trash', JSON.stringify(trash));
+      refreshTrash();
+    }
+    list.appendChild(li);
+  });
+}
+
+// Notes app
+function saveNotes(){
+  const val = document.getElementById('note-text').value;
+  localStorage.setItem('notes', val);
+  alert('Notes saved!');
+}
+// Load notes on start
+document.getElementById('note-text').value = localStorage.getItem('notes')||'';
+</script>
 </body>
 </html>
