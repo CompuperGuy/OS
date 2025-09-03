@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuvilix OS</title>
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <style>
+    body {
+      background: teal;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .window {
+      width: 400px;
+    }
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: silver;
+      display: flex;
+      align-items: center;
+      padding: 2px;
+      border-top: 2px solid white;
+    }
+    .start-btn {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Welcome to MyOS</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p>made on linux kernal</p>
+      <section class="field-row" style="justify-content: flex-end">
+        <button onclick="alert('Booting MyOS in QEMU…')">Boot</button>
+        <button onclick="alert('Download from GitHub Releases!')">Download</button>
+      </section>
+    </div>
+  </div>
+
+  <div class="taskbar">
+    <button class="start-btn">Start</button>
+    <span>MyOS v0.1</span>
+  </div>
+</body>
+</html>
