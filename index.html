@@ -2,22 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nuvilix OS</title>
+  <title>XiliX OS</title>
   <link rel="stylesheet" href="https://unpkg.com/98.css">
   <style>
     body {
-      background: teal;
       margin: 0;
       height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: teal;
+      font-family: "MS Sans Serif", sans-serif;
+      overflow: hidden;
+    }
+    .desktop {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .icon {
+      width: 80px;
+      text-align: center;
+      color: white;
+      cursor: default;
+      position: absolute;
+    }
+    .icon img {
+      width: 32px;
+      height: 32px;
+      display: block;
+      margin: 0 auto 4px;
     }
     .window {
-      width: 400px;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 300px;
+      display: none;
+      z-index: 10;
     }
     .taskbar {
-      position: fixed;
+      position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
@@ -25,8 +47,8 @@
       background: silver;
       display: flex;
       align-items: center;
-      padding: 2px;
       border-top: 2px solid white;
+      padding: 2px;
     }
     .start-btn {
       margin-right: 8px;
@@ -34,27 +56,80 @@
   </style>
 </head>
 <body>
-  <div class="window">
-    <div class="title-bar">
-      <div class="title-bar-text">Welcome to MyOS</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
+  <div class="desktop" id="desktop">
+    <!-- Desktop Icons -->
+    <div class="icon" style="top: 20px; left: 20px;" onclick="openWindow('mycomputer')">
+      <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/system-file-manager-icon.png" alt="icon">
+      <span>My Computer</span>
+    </div>
+    <div class="icon" style="top: 120px; left: 20px;" onclick="openWindow('about')">
+      <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-status/32/dialog-information-icon.png" alt="icon">
+      <span>About</span>
+    </div>
+    <div class="icon" style="top: 220px; left: 20px;" onclick="openWindow('trash')">
+      <img src="https://icons.iconarchive.com/icons/papirus-team/papirus-places/32/user-trash-icon.png" alt="icon">
+      <span>Trash</span>
+    </div>
+
+    <!-- Windows -->
+    <div class="window" id="mycomputer">
+      <div class="title-bar">
+        <div class="title-bar-text">My Computer</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" onclick="closeWindow('mycomputer')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>Welcome to <b>XiliX OS</b>.</p>
+        <ul>
+          <li>Documents</li>
+          <li>Programs</li>
+          <li>Settings</li>
+        </ul>
       </div>
     </div>
-    <div class="window-body">
-      <p>made on linux kernal</p>
-      <section class="field-row" style="justify-content: flex-end">
-        <button onclick="alert('Booting MyOS in QEMU…')">Boot</button>
-        <button onclick="alert('Download from GitHub Releases!')">Download</button>
-      </section>
+
+    <div class="window" id="about">
+      <div class="title-bar">
+        <div class="title-bar-text">About XiliX OS</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" onclick="closeWindow('about')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p><b>XiliX OS</b><br>A modern OS with a retro look.<br><br>
+        Version: 0.1<br>
+        Designed for fun and learning.</p>
+      </div>
+    </div>
+
+    <div class="window" id="trash">
+      <div class="title-bar">
+        <div class="title-bar-text">Trash</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" onclick="closeWindow('trash')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>The trash is empty.</p>
+      </div>
     </div>
   </div>
 
+  <!-- Taskbar -->
   <div class="taskbar">
     <button class="start-btn">Start</button>
-    <span>MyOS v0.1</span>
+    <span>XiliX OS</span>
   </div>
+
+  <script>
+    function openWindow(id) {
+      document.getElementById(id).style.display = "block";
+    }
+    function closeWindow(id) {
+      document.getElementById(id).style.display = "none";
+    }
+  </script>
 </body>
 </html>
+
