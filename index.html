@@ -1,82 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>XiliX OS</title>
-<link rel="stylesheet" href="https://unpkg.com/98.css">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>XiliX OS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+  <script src="file-system.js" defer></script>
+
+  <!-- Apps -->
+  <script src="apps/explorer.js" defer></script>
+  <script src="apps/notes.js" defer></script>
+  <script src="apps/terminal.js" defer></script>
+  <script src="apps/trash.js" defer></script>
+  <script src="apps/settings.js" defer></script>
+  <script src="apps/browser.js" defer></script>
+  <script src="apps/paint.js" defer></script>
+  <script src="apps/minesweeper.js" defer></script>
+  <script src="apps/calculator.js" defer></script>
+  <script src="apps/music.js" defer></script>
+  <script src="apps/code.js" defer></script>
 </head>
 <body>
-  <!-- Boot / Splash (Win95-style) -->
+  <!-- Boot screen -->
   <div id="boot">
-    <div class="boot-card">
-      <div class="boot-logo">XiliX</div>
-      <div class="boot-sub">Starting Windows 95 style...</div>
-      <div class="boot-progress-frame">
-        <div id="boot-bar" class="boot-progress"></div>
+    <div class="boot-screen">
+      <h1>XiliX OS</h1>
+      <p>Starting Windows 95...</p>
+      <div class="boot-bar">
+        <div id="boot-progress"></div>
       </div>
-      <div class="boot-tip">Press any key to skip</div>
     </div>
   </div>
 
   <!-- Desktop -->
-  <div id="desktop">
-    <!-- Desktop icons -->
-    <div class="icon" style="top:20px; left:20px;" onclick="OS.openApp('explorer')">
-      <img src="https://icons.iconarchive.com/icons/nuovextreme/flat/32/Computer-icon.png" alt="Explorer"><span>Explorer</span>
+  <div id="desktop" class="desktop" style="display:none;">
+    <!-- Icons -->
+    <div class="icon" style="top:20px;left:20px;" onclick="OS.openApp('explorer')">
+      <img src="icons/computer.png"><span>My Computer</span>
     </div>
-
-    <div class="icon" style="top:120px; left:20px;" onclick="OS.openApp('notes')">
-      <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Apps-text-editor-icon.png" alt="Notes"><span>Notes</span>
+    <div class="icon" style="top:120px;left:20px;" onclick="OS.openApp('notes')">
+      <img src="icons/notepad.png"><span>Notes</span>
     </div>
-
-    <div class="icon" style="top:220px; left:20px;" onclick="OS.openApp('terminal')">
-      <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Apps-terminal-icon.png" alt="Terminal"><span>Terminal</span>
+    <div class="icon" style="top:220px;left:20px;" onclick="OS.openApp('terminal')">
+      <img src="icons/terminal.png"><span>Terminal</span>
     </div>
-
-    <div class="icon" style="top:320px; left:20px;" onclick="OS.openApp('browser')">
-      <img src="https://icons.iconarchive.com/icons/graphicloads/100-flat/32/internet-icon.png" alt="Internet"><span>Internet</span>
+    <div class="icon" style="top:320px;left:20px;" onclick="OS.openApp('browser')">
+      <img src="icons/browser.png"><span>Internet</span>
     </div>
-
-    <div class="icon" style="top:420px; left:20px;" onclick="OS.openApp('trash')">
-      <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Places-user-trash-icon.png" alt="Trash"><span>Trash</span>
+    <div class="icon" style="top:420px;left:20px;" onclick="OS.openApp('paint')">
+      <img src="icons/paint.png"><span>Paint</span>
     </div>
-
-    <div class="icon" style="top:520px; left:20px;" onclick="OS.openApp('settings')">
-      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-1/32/settings-gear-icon.png" alt="Settings"><span>Settings</span>
+    <div class="icon" style="top:520px;left:20px;" onclick="OS.openApp('minesweeper')">
+      <img src="icons/minesweeper.png"><span>Minesweeper</span>
     </div>
-
-    <!-- Taskbar -->
-    <div class="taskbar">
-      <button class="start-btn" onclick="OS.toggleStart()">Start ▾</button>
-      <div id="taskbar-apps" class="taskbar-apps"></div>
-      <div id="taskbar-clock" class="taskbar-clock"></div>
+    <div class="icon" style="top:620px;left:20px;" onclick="OS.openApp('calculator')">
+      <img src="icons/calc.png"><span>Calculator</span>
     </div>
-
-    <!-- Start menu -->
-    <div id="start-menu" class="start-menu">
-      <button onclick="OS.openApp('explorer')">File Explorer</button>
-      <button onclick="OS.openApp('notes')">Notes</button>
-      <button onclick="OS.openApp('terminal')">Terminal</button>
-      <button onclick="OS.openApp('browser')">Internet</button>
-      <button onclick="OS.openApp('settings')">Settings</button>
-      <hr/>
-      <button onclick="alert('XiliX OS — a retro browser OS demo')">About XiliX</button>
+    <div class="icon" style="top:720px;left:20px;" onclick="OS.openApp('music')">
+      <img src="icons/music.png"><span>Music</span>
     </div>
-
+    <div class="icon" style="top:820px;left:20px;" onclick="OS.openApp('code')">
+      <img src="icons/code.png"><span>Code</span>
+    </div>
   </div>
 
-  <!-- Core scripts -->
-  <script src="main.js"></script>
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <button class="start-btn" onclick="OS.toggleStart()">Start</button>
+    <div id="taskbar-apps"></div>
+  </div>
 
-  <!-- Apps (modular files) -->
-  <script src="apps/explorer.js"></script>
-  <script src="apps/notes.js"></script>
-  <script src="apps/terminal.js"></script>
-  <script src="apps/browser.js"></script>
-  <script src="apps/trash.js"></script>
-  <script src="apps/settings.js"></script>
+  <!-- Start Menu -->
+  <div id="start-menu" class="start-menu">
+    <button onclick="OS.openApp('explorer')">My Computer</button>
+    <button onclick="OS.openApp('notes')">Notes</button>
+    <button onclick="OS.openApp('terminal')">Terminal</button>
+    <button onclick="OS.openApp('browser')">Internet</button>
+    <button onclick="OS.openApp('paint')">Paint</button>
+    <button onclick="OS.openApp('minesweeper')">Minesweeper</button>
+    <button onclick="OS.openApp('calculator')">Calculator</button>
+    <button onclick="OS.openApp('music')">Music</button>
+    <button onclick="OS.openApp('code')">Code App</button>
+    <button onclick="OS.openApp('settings')">Settings</button>
+  </div>
 </body>
 </html>
 
