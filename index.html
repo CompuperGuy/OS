@@ -1,58 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>XiliX OS</title>
 <link rel="stylesheet" href="https://unpkg.com/98.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- Boot screen -->
-<div id="boot">Booting XiliX OS...</div>
-
-<!-- Desktop -->
-<div id="desktop">
-  <!-- Desktop icons -->
-  <div class="icon" style="top:20px; left:20px;" onclick="OS.openApp('explorer')">
-    <img src="icons/explorer.png"><span>Explorer</span>
-  </div>
-  <div class="icon" style="top:120px; left:20px;" onclick="OS.openApp('notes')">
-    <img src="icons/notes.png"><span>Notes</span>
-  </div>
-  <div class="icon" style="top:220px; left:20px;" onclick="OS.openApp('terminal')">
-    <img src="icons/terminal.png"><span>Terminal</span>
-  </div>
-  <div class="icon" style="top:320px; left:20px;" onclick="OS.openApp('trash')">
-    <img src="icons/trash.png"><span>Trash</span>
-  </div>
-  <div class="icon" style="top:420px; left:20px;" onclick="OS.openApp('settings')">
-    <img src="icons/settings.png"><span>Settings</span>
+  <!-- Boot / Splash (Win95-style) -->
+  <div id="boot">
+    <div class="boot-card">
+      <div class="boot-logo">XiliX</div>
+      <div class="boot-sub">Starting Windows 95 style...</div>
+      <div class="boot-progress-frame">
+        <div id="boot-bar" class="boot-progress"></div>
+      </div>
+      <div class="boot-tip">Press any key to skip</div>
+    </div>
   </div>
 
-  <!-- Taskbar -->
-  <div class="taskbar">
-    <button class="start-btn" onclick="OS.toggleStart()">Start</button>
-    <div id="taskbar-apps"></div>
-    <div id="taskbar-clock"></div>
+  <!-- Desktop -->
+  <div id="desktop">
+    <!-- Desktop icons -->
+    <div class="icon" style="top:20px; left:20px;" onclick="OS.openApp('explorer')">
+      <img src="https://icons.iconarchive.com/icons/nuovextreme/flat/32/Computer-icon.png" alt="Explorer"><span>Explorer</span>
+    </div>
+
+    <div class="icon" style="top:120px; left:20px;" onclick="OS.openApp('notes')">
+      <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Apps-text-editor-icon.png" alt="Notes"><span>Notes</span>
+    </div>
+
+    <div class="icon" style="top:220px; left:20px;" onclick="OS.openApp('terminal')">
+      <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Apps-terminal-icon.png" alt="Terminal"><span>Terminal</span>
+    </div>
+
+    <div class="icon" style="top:320px; left:20px;" onclick="OS.openApp('browser')">
+      <img src="https://icons.iconarchive.com/icons/graphicloads/100-flat/32/internet-icon.png" alt="Internet"><span>Internet</span>
+    </div>
+
+    <div class="icon" style="top:420px; left:20px;" onclick="OS.openApp('trash')">
+      <img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/32/Places-user-trash-icon.png" alt="Trash"><span>Trash</span>
+    </div>
+
+    <div class="icon" style="top:520px; left:20px;" onclick="OS.openApp('settings')">
+      <img src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-1/32/settings-gear-icon.png" alt="Settings"><span>Settings</span>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+      <button class="start-btn" onclick="OS.toggleStart()">Start ▾</button>
+      <div id="taskbar-apps" class="taskbar-apps"></div>
+      <div id="taskbar-clock" class="taskbar-clock"></div>
+    </div>
+
+    <!-- Start menu -->
+    <div id="start-menu" class="start-menu">
+      <button onclick="OS.openApp('explorer')">File Explorer</button>
+      <button onclick="OS.openApp('notes')">Notes</button>
+      <button onclick="OS.openApp('terminal')">Terminal</button>
+      <button onclick="OS.openApp('browser')">Internet</button>
+      <button onclick="OS.openApp('settings')">Settings</button>
+      <hr/>
+      <button onclick="alert('XiliX OS — a retro browser OS demo')">About XiliX</button>
+    </div>
+
   </div>
 
-  <!-- Start Menu -->
-  <div id="start-menu">
-    <button onclick="OS.openApp('explorer')">File Explorer</button>
-    <button onclick="OS.openApp('notes')">Notes</button>
-    <button onclick="OS.openApp('terminal')">Terminal</button>
-    <button onclick="OS.openApp('trash')">Trash</button>
-    <button onclick="OS.openApp('settings')">Settings</button>
-    <button onclick="alert('XiliX OS v0.2')">About</button>
-  </div>
-</div>
+  <!-- Core scripts -->
+  <script src="main.js"></script>
 
-<script src="main.js"></script>
-<script src="apps/explorer.js"></script>
-<script src="apps/notes.js"></script>
-<script src="apps/terminal.js"></script>
-<script src="apps/trash.js"></script>
-<script src="apps/settings.js"></script>
+  <!-- Apps (modular files) -->
+  <script src="apps/explorer.js"></script>
+  <script src="apps/notes.js"></script>
+  <script src="apps/terminal.js"></script>
+  <script src="apps/browser.js"></script>
+  <script src="apps/trash.js"></script>
+  <script src="apps/settings.js"></script>
 </body>
 </html>
+
