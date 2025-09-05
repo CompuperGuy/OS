@@ -1,83 +1,61 @@
-/* XiliX OS - 90s Windows 95 look tweaks */
-@font-face {
-  font-family: "MsSans";
-  src: local("MS Sans Serif"), local("Tahoma"), local("Arial");
-}
 body {
-  margin: 0; height: 100vh; overflow: hidden;
-  font-family: MsSans, Tahoma, Arial, sans-serif;
-  background: #008080; /* teal desktop */
+  margin: 0;
+  height: 100vh;
+  background: teal;
+  font-family: "MS Sans Serif", sans-serif;
+  overflow: hidden;
 }
 
-/* Boot */
-#boot {
-  position: fixed; inset: 0; display:flex; align-items:center; justify-content:center;
-  background: #000; color: #fff; z-index: 9999;
-}
-.boot-card {
-  width: 420px; padding: 22px; border: 3px outset #cfcfcf; background: #0b2540;
-  text-align: center; color: #fff;
-}
-.boot-logo {
-  font-size: 48px; font-weight: bold; color: #eee; letter-spacing: 2px;
-  text-shadow: 1px 1px 0 #111;
-}
-.boot-sub { margin-top: 10px; color: #dcdcdc; }
-.boot-progress-frame {
-  margin: 18px auto; width: 320px; height: 16px; border: 2px inset #fff; background: #808080;
-}
-.boot-progress { height: 100%; width: 0%; background: #00008b; }
+.desktop { position: relative; width: 100%; height: 100%; }
 
-/* Desktop icons */
-#desktop { display:none; position:relative; width:100%; height:100%; }
-.icon { width:88px; text-align:center; color: #fff; cursor:pointer; position:absolute; user-select:none; }
-.icon img { width:32px;height:32px; display:block; margin:0 auto 6px; filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.4)); }
-.icon span { display:block; font-size:12px; color:#fff; text-shadow: 1px 1px 0 #004; }
+.icon {
+  width: 80px;
+  text-align: center;
+  color: white;
+  cursor: default;
+  position: absolute;
+  font-size: 12px;
+}
+.icon img {
+  width: 32px; height: 32px;
+  display: block; margin: 0 auto 4px;
+  image-rendering: pixelated;
+}
 
-/* Windows */
 .window {
-  position:absolute; background:#C0C0C0; border:2px solid #000; box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
-  display:none; min-width:220px; min-height:120px;
+  position: absolute;
+  background: #c0c0c0;
+  border: 2px solid black;
+  display: none;
+  z-index: 10;
 }
 .title-bar {
-  height:26px; background: linear-gradient(#00008b,#000064); color:#fff; display:flex; align-items:center;
-  justify-content:space-between; padding:2px 4px; cursor: move; user-select:none;
+  display: flex; justify-content: space-between; align-items: center;
+  background: navy; color: white; padding: 2px 4px; font-weight: bold;
 }
-.title-bar-text { font-weight:bold; padding-left:6px; font-size:13px; }
-.title-bar-controls button { width:18px; height:18px; margin-left:4px; }
-
-/* window body */
-.window-body { padding:8px; background:#C0C0C0; height: calc(100% - 26px); overflow:auto; }
-
-/* resizer */
-.win-resizer {
-  width:12px; height:12px; position:absolute; right:2px; bottom:2px; cursor:se-resize;
-  border-right:2px solid #000; border-bottom:2px solid #000;
+.title-bar-controls button {
+  background: silver; border: 1px outset white;
+  width: 16px; height: 16px;
 }
 
-/* taskbar and start */
 .taskbar {
-  position:absolute; left:0; right:0; bottom:0; height:38px; background:#cfcfcf;
-  border-top:2px solid #fff; display:flex; align-items:center; padding:4px;
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+  background: silver; display: flex; align-items: center;
+  border-top: 2px solid white; padding: 2px;
 }
-.start-btn { margin-right:8px; }
-.taskbar-apps { display:flex; gap:6px; margin-left:6px; }
-.taskbar-app {
-  background:#e0e0e0; border:1px solid #000; padding:4px 8px; cursor:pointer; font-size:12px;
-}
-.taskbar-clock { margin-left:auto; margin-right:8px; font-size:12px; }
+.start-btn { margin-right: 8px; }
 
-/* Start menu */
 .start-menu {
-  position:absolute; left:6px; bottom:40px; width:210px; background:#cfcfcf; border:2px solid #000; display:none;
-  flex-direction:column; padding:6px; z-index:1000;
+  display:none; position:absolute; bottom:40px; left:0;
+  background:silver; border:2px solid black; padding:5px;
+  display:flex; flex-direction:column;
 }
-.start-menu button { margin:4px 0; text-align:left; }
+.start-menu button { margin:2px 0; }
 
-/* inputs */
-input[type="text"], textarea { font-family: inherit; font-size:13px; }
-
-/* small helpers */
-.small { font-size:12px; color:#222; }
+.boot-screen {
+  text-align:center; margin-top:200px; color:white;
+}
+.boot-bar { width:300px; height:20px; border:2px inset white; background:gray; margin:auto; }
+#boot-progress { height:100%; width:0%; background:navy; }
 
  
