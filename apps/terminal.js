@@ -1,0 +1,35 @@
+/* Tiny simulated terminal */
+Apps.terminal = {
+  open(){
+    this.win = OS.createWindow({id:'terminal', title:'Terminal', width:480, height:300, top:180, left:180});
+    this.win.style.display='block'; OS.bringToFront(this.win); OS.addTask('terminal','Terminal');
+    this.body = document.getElementById('body-terminal');
+    this.render();
+  },
+
+  close(){ this.win.style.display='none'; OS.removeTask('terminal'); },
+
+  render(){
+    this.body.innerHTML = `<div id="term-out" style="background:#000; color:#0f0; height:180px; padding:6px; font-family:monospace; overflow:auto;"></div>
+      <input id="term-in" style="width:100%;" placeholder="type command and press Enter">`;
+    document.getElementById('term-in').addEventListener('keydown', (e)=>{
+      if(e.key==='Enter'){ this.exec(e.target.value); e.target.value=''; }
+    });
+    this.println('Welcome to XiliX Terminal. Type help');
+  },
+
+  println(t){ const o = document.getElementById('term-out'); o.textContent += t + '\n'; o.scrollTop = o.scrollHeight; },
+
+  exec(cmd){
+    this.println('> ' + cmd);
+    const parts = cmd.trim().split(' ');
+    const c = parts[0].toLowerCase();
+    if(c==='help'){ this.println('help, echo [text], files, notes, clear, reset'); }
+    else if(c==='echo'){ this.println(parts.slice(1).join(' ')); }
+    else if(c==='files'){ const files = JSON.parse(localStorage.getItem('xilix_files')||'[]'); this.println(files.map(f=>f.name).join('\n')||'[no files]'); }
+    else if(c==='notes'){ this.println(localStorage.getItem('xilix_notes') || '[no notes]'); }
+    else if(c==='clear'){ document.getElementById('term-out').textContent = ''; }
+    else if(c==='reset'){ if(confirm('Reset all XiliX data?')){ localStorage.clear(); location.reload(); } }
+    else this.println('Unknown command: ' + c);
+  }
+};
