@@ -1,19 +1,19 @@
 /* Notes app */
 Apps.notes = {
   open(){
-    this.win = OS.createWindow({id:'notes', title:'Notes', width:380, height:300, top:140, left:140});
-    this.win.style.display='block';
-    OS.bringToFront(this.win); OS.addTask('notes','Notes');
-    this.body = document.getElementById('body-notes');
+    this.id='notes';
+    this.win = OS.createWindow({id:this.id,title:'Notes',width:420,height:340,top:160,left:160});
+    this.win.style.display='block'; OS.bringToFront(this.win); OS.addTask(this.id,'Notes');
+    this.body = document.getElementById('body-'+this.id);
     this.render();
   },
 
-  close(){ this.win.style.display='none'; OS.removeTask('notes'); },
+  close(){ this.win.style.display='none'; OS.removeTask(this.id); },
 
   render(){
     const val = localStorage.getItem('xilix_notes') || '';
-    this.body.innerHTML = `<textarea id="notes-area" rows="12" style="width:100%;">${escapeHtml(val)}</textarea>
-      <div style="margin-top:6px;"><button onclick="Apps.notes.save()">Save</button> <button onclick="Apps.notes.clear()">Clear</button></div>`;
+    this.body.innerHTML = `<textarea id="notes-area" rows="14" style="width:100%;">${val}</textarea>
+      <div style="margin-top:8px;"><button onclick="Apps.notes.save()">Save</button> <button onclick="Apps.notes.clear()">Clear</button></div>`;
   },
 
   save(){
@@ -22,8 +22,7 @@ Apps.notes = {
     alert('Notes saved');
   },
 
-  clear(){ if(confirm('Clear notes?')){ localStorage.removeItem('xilix_notes'); this.render(); } }
+  clear(){
+    if(confirm('Clear notes?')){ localStorage.removeItem('xilix_notes'); this.render(); }
+  }
 };
-
-/* small helper */
-function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
