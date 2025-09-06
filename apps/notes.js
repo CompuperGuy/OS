@@ -1,28 +1,17 @@
-/* Notes app */
-Apps.notes = {
+Apps.notes={
   open(){
-    this.id='notes';
-    this.win = OS.createWindow({id:this.id,title:'Notes',width:420,height:340,top:160,left:160});
-    this.win.style.display='block'; OS.bringToFront(this.win); OS.addTask(this.id,'Notes');
-    this.body = document.getElementById('body-'+this.id);
-    this.render();
+    if(this.win){ this.win.style.display="block"; OS.bringToFront(this.win); return; }
+    this.win=OS.createWindow({id:"notes",title:"Notes",width:400,height:300,top:150,left:200});
+    this.win.style.display="block"; OS.bringToFront(this.win); OS.addTask("notes","Notes");
+    this.body=document.getElementById("body-notes");
+    this.body.innerHTML="<textarea id='notes-area' style='width:100%;height:90%'></textarea>"+
+      "<br><button onclick='Apps.notes.save()'>Save</button>";
+    document.getElementById("notes-area").value=FileSystem.readFile("notes.txt")||"";
   },
-
-  close(){ this.win.style.display='none'; OS.removeTask(this.id); },
-
-  render(){
-    const val = localStorage.getItem('xilix_notes') || '';
-    this.body.innerHTML = `<textarea id="notes-area" rows="14" style="width:100%;">${val}</textarea>
-      <div style="margin-top:8px;"><button onclick="Apps.notes.save()">Save</button> <button onclick="Apps.notes.clear()">Clear</button></div>`;
-  },
-
+  close(){ this.win.style.display="none"; OS.removeTask("notes"); },
   save(){
-    const v = document.getElementById('notes-area').value;
-    localStorage.setItem('xilix_notes', v);
-    alert('Notes saved');
-  },
-
-  clear(){
-    if(confirm('Clear notes?')){ localStorage.removeItem('xilix_notes'); this.render(); }
+    let text=document.getElementById("notes-area").value;
+    FileSystem.saveFile("notes.txt",text);
+    alert("Notes saved!");
   }
 };
