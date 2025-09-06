@@ -16,12 +16,71 @@ body {
   position: absolute;
   font-size: 12px;
 }
-.icon img {
-  width: 32px; height: 32px;
-  display: block; margin: 0 auto 4px;
-  image-rendering: pixelated;
+.icon .pixel-icon {
+  width: 16px; height: 16px; margin: 0 auto 4px;
 }
 
+/* Taskbar */
+.taskbar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+  background: silver; display: flex; align-items: center;
+  border-top: 2px solid white; padding: 2px;
+}
+.start-btn { margin-right: 8px; }
+
+.start-menu {
+  display:none; position:absolute; bottom:40px; left:0;
+  background:silver; border:2px solid black; padding:5px;
+  display:flex; flex-direction:column;
+}
+.start-menu button { margin:2px 0; }
+
+/* Boot screen */
+.boot-screen {
+  text-align:center; margin-top:200px; color:white;
+}
+.boot-bar { width:300px; height:20px; border:2px inset white; background:gray; margin:auto; }
+#boot-progress { height:100%; width:0%; background:navy; }
+
+/* Pixel art icons (box-shadow trick) */
+.icon-computer {
+  background: gray;
+  box-shadow: 2px 2px 0 black,3px 2px 0 black,2px 3px 0 lightgray,3px 3px 0 lightgray;
+}
+.icon-notes {
+  background: white;
+  box-shadow: 1px 1px 0 black,2px 2px 0 blue,3px 3px 0 blue;
+}
+.icon-terminal {
+  background: black;
+  box-shadow: 2px 2px 0 lime,3px 3px 0 lime,4px 2px 0 lime;
+}
+.icon-browser {
+  background: lightblue;
+  box-shadow: 1px 1px 0 blue,2px 2px 0 green,3px 3px 0 blue;
+}
+.icon-paint {
+  background: wheat;
+  box-shadow: 2px 2px 0 red,3px 2px 0 blue,2px 3px 0 green,3px 3px 0 yellow;
+}
+.icon-minesweeper {
+  background: black;
+  box-shadow: 2px 2px 0 red,3px 3px 0 red;
+}
+.icon-calc {
+  background: gray;
+  box-shadow: 1px 1px 0 white,2px 2px 0 black,3px 3px 0 black;
+}
+.icon-music {
+  background: transparent;
+  box-shadow: 2px 1px 0 black,3px 1px 0 black,2px 2px 0 black,3px 2px 0 black,4px 2px 0 black,4px 3px 0 black;
+}
+.icon-code {
+  background: black;
+  box-shadow: 2px 2px 0 lime,3px 3px 0 lime,4px 2px 0 lime;
+}
+
+/* Windows */
 .window {
   position: absolute;
   background: #c0c0c0;
@@ -38,24 +97,14 @@ body {
   width: 16px; height: 16px;
 }
 
-.taskbar {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
-  background: silver; display: flex; align-items: center;
-  border-top: 2px solid white; padding: 2px;
+/* XipPy Assistant */
+#xippy {
+  position: absolute; bottom: 60px; right: 20px; font-size: 32px;
+  display: flex; flex-direction: column; align-items: center;
 }
-.start-btn { margin-right: 8px; }
-
-.start-menu {
-  display:none; position:absolute; bottom:40px; left:0;
-  background:silver; border:2px solid black; padding:5px;
-  display:flex; flex-direction:column;
+.xippy-body { font-size: 48px; }
+.xippy-bubble {
+  background: #ffffcc; border: 1px solid black;
+  padding: 5px; font-size: 12px; margin-bottom: 5px;
+  max-width: 200px; border-radius: 6px;
 }
-.start-menu button { margin:2px 0; }
-
-.boot-screen {
-  text-align:center; margin-top:200px; color:white;
-}
-.boot-bar { width:300px; height:20px; border:2px inset white; background:gray; margin:auto; }
-#boot-progress { height:100%; width:0%; background:navy; }
-
- 
